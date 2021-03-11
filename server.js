@@ -37,7 +37,7 @@ const entrySchema = new mongoose.Schema({
 });
 
 //sets up reference to EntryModel
-const EntryModel = mongoose.model("Entry", entrySchema);
+const EntryModel = mongoose.model("entries", entrySchema);
 
 //-------------------- Server as backend to React Front End --------------------//
 //limits access to client/public folder for security
@@ -70,23 +70,25 @@ app.listen(port, () => {
 });
 
 //-------------------- Supporting Functions --------------------//
+//generates a new entry and sends it to database
 async function createNewEntry(entry) {
-  console.log("the entry is", entry);
-  let today = new Date();
-  console.log("date is ", today.toLocaleDateString())
-  //creates a new instance of the entry model
-  //   const newEntry = new entrySchema({
-  //     title: entry.title,
-  //     content: entry.content,
-  //     date: "",
-  //     categories: entry.categories,
-  //   });
+  //sets the time of the entry in local date time string
+  let entryTime = new Date().toLocaleDateString();
 
-  //   newEntry.save((err, data) => {
-  //     if (err) {
-  //       console.error(err.message);
-  //     } else {
-  //       console.log("Successfully added: ", data);
-  //     }
-  //   });
+  //constructs the new entry using the EntryModel
+  const newEntry = new EntryModel({
+    title: entry.title,
+    content: entry.content,
+    date: entryTime,
+    categories: entry.categories,
+  });
+
+  //saves new entry in the database, with error handling
+  newEntry.save((err, data) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      console.log("Successfully added: ", data);
+    }
+  });
 }

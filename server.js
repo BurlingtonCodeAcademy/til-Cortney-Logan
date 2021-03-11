@@ -48,15 +48,33 @@ app.use(express.urlencoded({ extended: false }));
 
 //---------- Home Page ----------//
 //accepts users input from home page to create new post
-app.post("/test", (req, res) => {
+app.post("/addentry", (req, res) => {
   //accepts input and stores in variable newPost
   let newEntry = req.body;
-  console.log(newEntry);
 
   //accepts new post entry and saves to the database
   createNewEntry(newEntry);
 
+  //refreshes page in response to reset form
   res.redirect("../");
+});
+
+//---------- Facts Page ----------//
+//api end point to retrieve all entries from database
+app.get("/allposts", async (req, res) => {
+  //constructs cursor that contains all entries in database collection
+  const cursor = await EntryModel.find({});
+
+  //initializes an array to hold contents of cursor to be sent to Facts page
+  let results = [];
+
+  //adds each entry of cursor to results array
+  await cursor.forEach((entry) => {
+    results.push(entry);
+  });
+
+  //responds with json results as array
+  res.json(results);
 });
 
 //catchall

@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
 const { title } = require("process");
+const { ObjectId } = require("mongodb");
 
 const port = process.env.PORT || 5000;
 
@@ -44,7 +45,7 @@ const EntryModel = mongoose.model("entries", entrySchema);
 app.use(express.static("./client/public"));
 
 //middlewear to read req.body
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 //---------- Home Page ----------//
 //accepts users input from home page to create new post
@@ -75,6 +76,16 @@ app.get("/allposts", async (req, res) => {
 
   //responds with json results as array
   res.json(results);
+});
+
+//api end point to retrieve a single entry from database based on id
+app.get("/individualpost/:postID", async (req, res) => {
+  //stores postID from path as entry ID
+  let entryID = req.params.postID;
+  //awaits response from database - result will be an object since we're using findOne
+  let entryObj = await EntryModel.findOne({ _id: ObjectId(entryID) });
+  //respond with json object
+  res.json(entryObj);
 });
 
 //catchall

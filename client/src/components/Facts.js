@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 
 function Facts(props) {
   //declares state to hold entries once retrieved from database
@@ -25,16 +26,15 @@ function Facts(props) {
 
   return (
     <div id="facts-page-container">
-      <h1>This is the facts page - for all entries</h1>
       <div id="list-of-entries">
         {entries &&
           entries.map((entry, index) => {
             return (
-              <div key={index}>
+              <Link to={`/facts/${entry._id}`}><div class="facts-page-entry" key={index}>
                 <h5>{entry.title}</h5>
                 <h6>{entry.date}</h6>
                 <p>{entry.content}</p>
-              </div>
+              </div></Link>
             );
           })}
       </div>

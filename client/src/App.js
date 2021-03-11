@@ -4,11 +4,13 @@ import Home from "./components/Home.js"
 import Facts from "./components/Facts.js"
 import Entry from "./components/Entry.js"
 import NotFound from "./components/NotFound.js"
+import Header from "./components/Header.js"
 
 
 function App() {
   return (
     <div>
+      <Header />
       <h1>Today I Learned:</h1>
       <Switch>
         <Route exact path="/" component={Home} />

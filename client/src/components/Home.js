@@ -2,8 +2,6 @@ function Home(props) {
 
   return (
     <div id="home-page-container">
-      <h1>This is the home page</h1>
-
       {/* new entry form allows users to input title, content, and categories for a new TIL entry */}
       <form id="add-an-entry-form" method="POST" action={"/addentry"}>
         <label>Title:</label>

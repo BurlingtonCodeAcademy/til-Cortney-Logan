@@ -34,7 +34,14 @@ const entrySchema = new mongoose.Schema({
   title: String,
   content: String,
   date: Date,
-  categories: String,
+  javascript: Boolean,
+  json: Boolean,
+  html: Boolean,
+  css: Boolean,
+  frontend: Boolean,
+  backend: Boolean,
+  fullstack: Boolean,
+  databases: Boolean,
 });
 
 //sets up reference to EntryModel
@@ -78,6 +85,8 @@ app.get("/allposts", async (req, res) => {
   res.json(results);
 });
 
+//---------- Individual Entry Page ----------//
+
 //api end point to retrieve a single entry from database based on id
 app.get("/individualpost/:postID", async (req, res) => {
   //stores postID from path as entry ID
@@ -86,6 +95,31 @@ app.get("/individualpost/:postID", async (req, res) => {
   let entryObj = await EntryModel.findOne({ _id: ObjectId(entryID) });
   //respond with json object
   res.json(entryObj);
+});
+
+//post request to update a single entry
+app.post("/editentry/:postID", async (req, res) => {
+  //stores postID from path as entry ID
+  let entryID = req.params.postID;
+  //stores new post params from req.body
+  let updatedEntry = req.body;
+  console.log("updated content is", req.body);
+
+  //send request to database to update entry
+  await EntryModel.updateOne(
+    { _id: ObjectId(entryID) },
+    { $set: updatedEntry }
+  );
+  res.redirect("../facts");
+});
+
+app.get("/deleteentry/:postID", async (req, res) => {
+  //stores postID from path as entry ID
+  let entryID = req.params.postID;
+  //passes id as ObjectId to be deleted
+  await EntryModel.deleteOne({ _id: ObjectId(entryID) });
+  console.log("deleted post", entryID);
+  res.redirect("../");
 });
 
 //catchall
@@ -101,15 +135,23 @@ app.listen(port, () => {
 //-------------------- Supporting Functions --------------------//
 //generates a new entry and sends it to database
 async function createNewEntry(entry) {
+  console.log("entry is ", entry);
   //sets the time of the entry in local date time string
-  let entryTime = new Date().toLocaleDateString();
+  let entryTime = new Date().toISOString();
 
   //constructs the new entry using the EntryModel
   const newEntry = new EntryModel({
     title: entry.title,
     content: entry.content,
     date: entryTime,
-    categories: entry.categories,
+    javascript: !!entry.javascript,
+    json: !!entry.json,
+    html: !!entry.html,
+    css: !!entry.css,
+    frontend: !!entry.frontend,
+    backend: !!entry.backend,
+    fullstack: !!entry.fullstack,
+    databases: !!entry.databases,
   });
 
   //saves new entry in the database, with error handling

@@ -5,9 +5,16 @@ function Header(props) {
     <div>
       <header>
         <Link to={"/"}>
-          <h1>TIL</h1>
+          <h1>Today I Learned</h1>
         </Link>
-        <Link to={"/facts"}><h1>All Entries</h1></Link>
+        <nav>
+          <Link to={"/"}>
+            <h2>Home</h2>
+          </Link>
+          <Link to={"/facts"}>
+            <h2>All Entries</h2>
+          </Link>
+        </nav>
       </header>
     </div>
   );

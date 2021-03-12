@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function Facts(props) {
   //declares state to hold entries once retrieved from database
@@ -22,19 +22,35 @@ function Facts(props) {
     }
   });
 
-  console.log("entries is", entries);
-
+  // each entry is set up as a link to entry page with title, date, and categories
   return (
     <div id="facts-page-container">
+      <div id="search-container">
+        <form id="search-form">
+          <select id="filter-options" name="category">
+            <option value="pick-a-filter">Filter by</option>
+            <option value="title">Title</option>
+            <option value="categories">Category</option>
+          </select>
+          <input id="user-input" name="user-input" type="text" />
+          <input id = "filter-button" type="submit" value="Filter" />
+        </form>
+      </div>
       <div id="list-of-entries">
         {entries &&
           entries.map((entry, index) => {
             return (
-              <Link to={`/facts/${entry._id}`}><div class="facts-page-entry" key={index}>
-                <h5>{entry.title}</h5>
-                <h6>{entry.date}</h6>
-                <p>{entry.content}</p>
-              </div></Link>
+              <Link to={`/facts/${entry._id}`} key={index}>
+                <div className="facts-page-entry">
+                  <div className="entry-title">
+                    <h3>{entry.title}</h3>
+                    <h3>{entry.date}</h3>
+                  </div>
+                  <div className="entry-content">
+                    <p>{entry.content}</p>
+                  </div>
+                </div>
+              </Link>
             );
           })}
       </div>

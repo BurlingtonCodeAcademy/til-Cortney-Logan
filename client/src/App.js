@@ -11,7 +11,6 @@ function App() {
   return (
     <div>
       <Header />
-      <h1>Today I Learned:</h1>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/facts" component={Facts} />

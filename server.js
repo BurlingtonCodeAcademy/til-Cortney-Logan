@@ -41,7 +41,7 @@ const entrySchema = new mongoose.Schema({
     frontend: Boolean,
     backend: Boolean,
     fullstack: Boolean,
-    databases: Boolean
+    databases: Boolean,
   },
 });
 
@@ -104,13 +104,13 @@ app.post("/editentry/:postID", async (req, res) => {
   let entryID = req.params.postID;
   //stores new post params from req.body
   let updatedEntry = req.body;
+
   console.log("updated content is", req.body);
 
-  //send request to database to update entry
-  await EntryModel.updateOne(
-    { _id: ObjectId(entryID) },
-    { $set: updatedEntry }
-  );
+  //passes ID and updatedentry data to updateEntry function
+  updateEntry(entryID, updatedEntry);
+
+  //redirects to facts page
   res.redirect("../facts");
 });
 
@@ -165,4 +165,32 @@ async function createNewEntry(entry) {
       console.log("Successfully added: ", data);
     }
   });
+}
+
+async function updateEntry(entryID, entry) {
+  //sets update time
+  // let updateTime = new Date().toISOString();
+
+  //constructs updated entry from submitted form using EntryModel
+  const updatedEntry = {
+    title: entry.title,
+    content: entry.content,
+    categories: {
+      javascript: !!entry.javascript,
+      json: !!entry.json,
+      html: !!entry.html,
+      css: !!entry.css,
+      frontend: !!entry.frontend,
+      backend: !!entry.backend,
+      fullstack: !!entry.fullstack,
+      databases: !!entry.databases,
+    },
+  };
+
+
+  // //send request to database to update entry
+  await EntryModel.updateOne(
+    { _id: ObjectId(entryID) },
+    { $set: updatedEntry }
+  );
 }

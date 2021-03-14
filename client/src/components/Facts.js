@@ -55,7 +55,7 @@ function Facts(props) {
                     {arrayOfCategories.map((category, index) => {
                       if(entry.categories[category])
                       return (
-                        <li>{`#${category}`}</li>
+                        <li key={index}>{`#${category}`}</li>
                       );
                     })}
                     {/* <div>{entry.categories.html && <p>#html</p>}</div> */}

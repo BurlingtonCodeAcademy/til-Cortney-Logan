@@ -45,6 +45,110 @@ function Entry(props) {
             defaultValue={entryData.content}
           />
           <br />
+
+          <label>
+            Categories:<span> select all relevant categories</span>
+            {/* <textarea id="entry-categories" name="categories"></textarea> */}
+            <div id="categories">
+              <div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="javascript"
+                    name="javascript"
+                    defaultChecked={entryData.categories.javascript}
+                  />
+                  <label className="category-labels" for="javascript">
+                    JavaScript
+                  </label>
+                </div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="json"
+                    name="json"
+                    defaultChecked={entryData.categories.json}
+                  />
+                  <label className="category-labels" for="json">
+                    JSON
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="html"
+                    name="html"
+                    defaultChecked={entryData.categories.html}
+                  />
+                  <label className="category-labels" for="html">
+                    HTML
+                  </label>
+                </div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="css"
+                    name="css"
+                    defaultChecked={entryData.categories.css}
+                  />
+                  <label className="category-labels" for="css">
+                    CSS
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="frontend"
+                    name="frontend"
+                    defaultChecked={entryData.categories.frontend}
+                  />
+                  <label className="category-labels" for="frontend">
+                    Front End
+                  </label>
+                </div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="backend"
+                    name="backend"
+                    defaultChecked={entryData.categories.backend}
+                  />
+                  <label className="category-labels" for="backend">
+                    Back End
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="fullstack"
+                    name="fullstack"
+                    defaultChecked={entryData.categories.fullstack}
+                  />
+                  <label className="category-labels" for="fullstack">
+                    Full Stack
+                  </label>
+                </div>
+                <div className="checkbox-option">
+                  <input
+                    type="checkbox"
+                    id="databases"
+                    name="databases"
+                    defaultChecked={entryData.categories.databases}
+                  />
+                  <label className="category-labels" for="databases">
+                    Databases
+                  </label>
+                </div>
+              </div>
+            </div>
+          </label>
+
           <input id="edit-button" type="submit" value="Edit" />
         </form>
       )}

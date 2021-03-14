@@ -22,6 +22,8 @@ function Facts(props) {
     }
   });
 
+  let arrayOfCategories = ["javascript", "json", "html", "css", "frontend", "backend", "fullstack", "databases"];
+
   // each entry is set up as a link to entry page with title, date, and categories
   return (
     <div id="facts-page-container">
@@ -33,7 +35,7 @@ function Facts(props) {
             <option value="categories">Category</option>
           </select>
           <input id="user-input" name="user-input" type="text" />
-          <input id = "filter-button" type="submit" value="Filter" />
+          <input id="filter-button" type="submit" value="Filter" />
         </form>
       </div>
       <div id="list-of-entries">
@@ -49,6 +51,15 @@ function Facts(props) {
                   <div className="entry-content">
                     <p>{entry.content}</p>
                   </div>
+                  <ul className = "categories-list">
+                    {arrayOfCategories.map((category, index) => {
+                      if(entry.categories[category])
+                      return (
+                        <li>{`#${category}`}</li>
+                      );
+                    })}
+                    {/* <div>{entry.categories.html && <p>#html</p>}</div> */}
+                  </ul>
                 </div>
               </Link>
             );

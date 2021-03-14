@@ -3,7 +3,6 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
-const { title } = require("process");
 const { ObjectId } = require("mongodb");
 
 const port = process.env.PORT || 5000;
@@ -34,14 +33,16 @@ const entrySchema = new mongoose.Schema({
   title: String,
   content: String,
   date: Date,
-  javascript: Boolean,
-  json: Boolean,
-  html: Boolean,
-  css: Boolean,
-  frontend: Boolean,
-  backend: Boolean,
-  fullstack: Boolean,
-  databases: Boolean,
+  categories: {
+    javascript: Boolean,
+    json: Boolean,
+    html: Boolean,
+    css: Boolean,
+    frontend: Boolean,
+    backend: Boolean,
+    fullstack: Boolean,
+    databases: Boolean
+  },
 });
 
 //sets up reference to EntryModel
@@ -144,14 +145,16 @@ async function createNewEntry(entry) {
     title: entry.title,
     content: entry.content,
     date: entryTime,
-    javascript: !!entry.javascript,
-    json: !!entry.json,
-    html: !!entry.html,
-    css: !!entry.css,
-    frontend: !!entry.frontend,
-    backend: !!entry.backend,
-    fullstack: !!entry.fullstack,
-    databases: !!entry.databases,
+    categories: {
+      javascript: !!entry.javascript,
+      json: !!entry.json,
+      html: !!entry.html,
+      css: !!entry.css,
+      frontend: !!entry.frontend,
+      backend: !!entry.backend,
+      fullstack: !!entry.fullstack,
+      databases: !!entry.databases,
+    },
   });
 
   //saves new entry in the database, with error handling

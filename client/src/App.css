@@ -153,6 +153,17 @@ label span{
     color: #432e33;
 }
 
+.categories-list{
+  display:flex;
+  list-style-type: none;
+  margin: 1vh 5vw;
+  padding: 0;
+}
+
+.categories-list li{
+  margin-right: 10px;
+}
+
 /*-------------------- Entry Page --------------------*/
 #entry-page-container {
   width: 50vw;

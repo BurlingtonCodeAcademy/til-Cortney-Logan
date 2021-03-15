@@ -68,8 +68,8 @@ app.post("/addentry", (req, res) => {
 //---------- Facts Page ----------//
 //api end point to retrieve all entries from database
 app.get("/allposts", async (req, res) => {
-  //constructs cursor that contains all entries in database collection
-  const cursor = await EntryModel.find({});
+  //constructs cursor that contains all entries in database collection - sorts by date, descending
+  const cursor = await EntryModel.find({}).sort({date:-1});
 
   //initializes an array to hold contents of cursor to be sent to Facts page
   let results = [];
@@ -91,8 +91,8 @@ app.get("/filterPosts/:category/:input", async (req, res) => {
 
   //if filter is for title or content search input is directly user input
   if (category === "title" || category === "content") {
-    //constructs cursor that contains all entries in database collection that match query
-    const cursor = await EntryModel.find({ [category]: input });
+    //constructs cursor that contains all entries in database collection that match query - sorts by date, descending
+    const cursor = await EntryModel.find({ [category]: input }).sort({date:-1});
     //initializes an array to hold contents of cursor to be sent to Facts page
     let results = [];
     //adds each entry of cursor into results array
@@ -104,8 +104,8 @@ app.get("/filterPosts/:category/:input", async (req, res) => {
   }
   //if users searched by category, input will be the category and are looking for that value to be true
   else {
-    //constructs cursor that contains all entries in database collection that match query
-    const cursor = await EntryModel.find({ [`categories.${input}`]: true });
+    //constructs cursor that contains all entries in database collection that match query - sorts by date, descending
+    const cursor = await EntryModel.find({ [`categories.${input}`]: true }).sort({date:-1});
     //initializes an array to hold contents of cursor to be sent to Facts page
     let results = [];
     //adds each entry of cursor into results array

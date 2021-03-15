@@ -86,6 +86,46 @@ app.get("/allposts", async (req, res) => {
   res.json(results);
 });
 
+app.get("/filterPosts/:category/:input", async (req, res) => {
+  //initiates variables for category and input for later use
+  let category = req.params.category;
+  let input = req.params.input;
+
+  //if filter is for title or content search in put is directly user input
+  if (category === "title" || category === "content") {
+    //constructs cursor that contains all entries in database collection that match query
+    const cursor = await EntryModel.find({ [category]: input });
+    //initializes an array to hold contents of cursor to be sent to Facts page
+    let results = [];
+    //adds each entry of cursor into results array
+    await cursor.forEach((entry) => {
+      results.push(entry);
+    });
+    //responds with json results as array
+    res.json(results);
+  }
+  //if users searched by category, input will be either true or false
+  else {
+    //constructs cursor that contains all entries in database collection that match query
+    const cursor = await EntryModel.find({ [`categories.${input}`]: true });
+    //initializes an array to hold contents of cursor to be sent to Facts page
+    let results = [];
+    //adds each entry of cursor into results array
+    await cursor.forEach((entry) => {
+      results.push(entry);
+    });
+    //responds with json results as array
+    res.json(results);
+  }
+});
+
+//api end point to accept facts page filter
+app.post("/search", async (req, res) => {
+  let body = req.body;
+  //redirects to facts with query params for filtering
+  res.redirect(`../facts?${body.category}=${body.input}`);
+});
+
 //---------- Individual Entry Page ----------//
 
 //api end point to retrieve a single entry from database based on id
@@ -105,8 +145,6 @@ app.post("/editentry/:postID", async (req, res) => {
   //stores new post params from req.body
   let updatedEntry = req.body;
 
-  console.log("updated content is", req.body);
-
   //passes ID and updatedentry data to updateEntry function
   updateEntry(entryID, updatedEntry);
 
@@ -117,10 +155,14 @@ app.post("/editentry/:postID", async (req, res) => {
 app.get("/deleteentry/:postID", async (req, res) => {
   //stores postID from path as entry ID
   let entryID = req.params.postID;
+
   //passes id as ObjectId to be deleted
   await EntryModel.deleteOne({ _id: ObjectId(entryID) });
-  console.log("deleted post", entryID);
-  res.redirect("../");
+
+  console.log("Successfully deleted: ", entryID);
+
+  //send 200 statuscode
+  return res.sendStatus(200);
 });
 
 //catchall
@@ -136,7 +178,6 @@ app.listen(port, () => {
 //-------------------- Supporting Functions --------------------//
 //generates a new entry and sends it to database
 async function createNewEntry(entry) {
-  console.log("entry is ", entry);
   //sets the time of the entry in local date time string
   let entryTime = new Date().toISOString();
 
@@ -168,9 +209,6 @@ async function createNewEntry(entry) {
 }
 
 async function updateEntry(entryID, entry) {
-  //sets update time
-  // let updateTime = new Date().toISOString();
-
   //constructs updated entry from submitted form using EntryModel
   const updatedEntry = {
     title: entry.title,
@@ -187,10 +225,11 @@ async function updateEntry(entryID, entry) {
     },
   };
 
-
   // //send request to database to update entry
   await EntryModel.updateOne(
     { _id: ObjectId(entryID) },
     { $set: updatedEntry }
   );
+
+  console.log("Successfully updated: ", entryID);
 }

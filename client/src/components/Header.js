@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function Header(props) {
+  //header with links to home and all entries
   return (
     <div>
       <header>

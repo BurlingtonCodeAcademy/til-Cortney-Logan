@@ -46,9 +46,9 @@ function Entry(props) {
           />
           <br />
 
+          {/* categories populate based on the existing value (true/false) for that entry */}
           <label>
             Categories:<span> select all relevant categories</span>
-            {/* <textarea id="entry-categories" name="categories"></textarea> */}
             <div id="categories">
               <div>
                 <div className="checkbox-option">
@@ -58,9 +58,7 @@ function Entry(props) {
                     name="javascript"
                     defaultChecked={entryData.categories.javascript}
                   />
-                  <label className="category-labels" for="javascript">
-                    JavaScript
-                  </label>
+                  <label className="category-labels">JavaScript</label>
                 </div>
                 <div className="checkbox-option">
                   <input
@@ -69,9 +67,7 @@ function Entry(props) {
                     name="json"
                     defaultChecked={entryData.categories.json}
                   />
-                  <label className="category-labels" for="json">
-                    JSON
-                  </label>
+                  <label className="category-labels">JSON</label>
                 </div>
               </div>
               <div>
@@ -82,9 +78,7 @@ function Entry(props) {
                     name="html"
                     defaultChecked={entryData.categories.html}
                   />
-                  <label className="category-labels" for="html">
-                    HTML
-                  </label>
+                  <label className="category-labels">HTML</label>
                 </div>
                 <div className="checkbox-option">
                   <input
@@ -93,9 +87,7 @@ function Entry(props) {
                     name="css"
                     defaultChecked={entryData.categories.css}
                   />
-                  <label className="category-labels" for="css">
-                    CSS
-                  </label>
+                  <label className="category-labels">CSS</label>
                 </div>
               </div>
               <div>
@@ -106,9 +98,7 @@ function Entry(props) {
                     name="frontend"
                     defaultChecked={entryData.categories.frontend}
                   />
-                  <label className="category-labels" for="frontend">
-                    Front End
-                  </label>
+                  <label className="category-labels">Front End</label>
                 </div>
                 <div className="checkbox-option">
                   <input
@@ -117,9 +107,7 @@ function Entry(props) {
                     name="backend"
                     defaultChecked={entryData.categories.backend}
                   />
-                  <label className="category-labels" for="backend">
-                    Back End
-                  </label>
+                  <label className="category-labels">Back End</label>
                 </div>
               </div>
               <div>
@@ -130,9 +118,7 @@ function Entry(props) {
                     name="fullstack"
                     defaultChecked={entryData.categories.fullstack}
                   />
-                  <label className="category-labels" for="fullstack">
-                    Full Stack
-                  </label>
+                  <label className="category-labels">Full Stack</label>
                 </div>
                 <div className="checkbox-option">
                   <input
@@ -141,9 +127,7 @@ function Entry(props) {
                     name="databases"
                     defaultChecked={entryData.categories.databases}
                   />
-                  <label className="category-labels" for="databases">
-                    Databases
-                  </label>
+                  <label className="category-labels">Databases</label>
                 </div>
               </div>
             </div>
@@ -156,6 +140,7 @@ function Entry(props) {
       <button id="delete-button" onClick={deleteEntry}>
         Delete
       </button>
+      {/* Modal - initially hidden but is triggered by delete button */}
       <Modal
         modalVisibility={modalVisibility}
         setModalVisibility={setModalVisibility}

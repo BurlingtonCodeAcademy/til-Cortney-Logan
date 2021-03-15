@@ -1,3 +1,4 @@
+//imports
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
@@ -7,11 +8,6 @@ const moment = require("moment");
 const { ObjectId } = require("mongodb");
 
 const port = process.env.PORT || 5000;
-
-//pulls in username and password from .env
-//note that naming convention is all caps for .env variables
-const user = process.env.USER;
-const password = process.env.PASSWORD;
 
 //-------------------- Server as frontend to Database Back End --------------------//
 
@@ -163,8 +159,8 @@ app.get("/deleteentry/:postID", async (req, res) => {
 
   console.log("Successfully deleted: ", entryID);
 
-  //send 200 statuscode
-  return res.sendStatus(200);
+  //send 200 status code
+  res.sendStatus(200);
 });
 
 //catchall
@@ -182,9 +178,6 @@ app.listen(port, () => {
 async function createNewEntry(entry) {
   //sets the time of the entry in local date time string
   let entryTime = moment().format();
-
-  console.log("entrytime is", entryTime);
-  console.log("moment().format() is", moment().format());
 
   //constructs the new entry using the EntryModel
   const newEntry = new EntryModel({

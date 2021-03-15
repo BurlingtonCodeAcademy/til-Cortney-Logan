@@ -73,6 +73,9 @@ function Facts(props) {
           <input id="user-input" name="input" type="text" />
           <input id="filter-button" type="submit" value="Filter" />
         </form>
+
+        {/* if results are filtered button shows offering option to remove filters */}
+        {query && <Link to={"/facts"}><button onClick ="window.location.reload()"  id="remove-all-filters">Remove All Filters</button></Link>}
       </div>
 
       {/* displays list of all posts and attributes */}

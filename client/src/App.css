@@ -1,3 +1,10 @@
+/* 
+Colors
+Turquoise: #B1D7D2 
+Cool Grey: #E5E2CA
+Brownish Purple: #432E33
+Orange Red: #E7472E*/
+
 body {
   text-align: center;
   margin: 0;
@@ -7,16 +14,8 @@ body {
     sans-serif;
 }
 
-/* 
-Colors
-Turquoise: #B1D7D2 
-Cool Grey: #E5E2CA
-Brownish Purple: #432E33
-Orange Red: #E7472E*/
-
 /*-------------------- Header --------------------*/
 header {
-  /* border: 1px solid red; */
   margin-bottom: 5vh;
   background-color: #b1d7d2;
 }
@@ -54,7 +53,7 @@ h2:hover {
   margin: 0 25vw;
 }
 
-#home-page-container h1{
+#home-page-container h1 {
   color: #432e33;
 }
 
@@ -69,21 +68,21 @@ h2:hover {
   display: block;
 }
 
-#categories{
+#categories {
   display: flex;
   justify-content: space-between;
 }
 
-#categories > div{
-margin: 0 1vw;
+#categories > div {
+  margin: 0 1vw;
 }
 
-#categories .category-labels{
+#categories .category-labels {
   font-size: 1.25rem;
   display: inline;
 }
 
-label span{
+label span {
   font-size: 1rem;
 }
 
@@ -124,45 +123,60 @@ label span{
   margin: 0 5vw;
 }
 
-#search-form{
+#search-form {
   margin: 0 25vw;
   display: flex;
   justify-content: space-between;
 }
 
-#search-form select, input{
+#search-form select,
+input {
   font-size: 1.5rem;
   margin: 2px;
 }
 
-#filter-options{
+#filter-options {
   width: 10vw;
 }
 
-#user-input{
+#user-input {
   width: 34vw;
 }
 
-#filter-button{
+#filter-button {
   width: 5vw;
   background-color: #e7472e;
   color: white;
   border-radius: 10px;
 }
 
-#filter-button:hover{
-    background-color: #b1d7d2;
-    color: #432e33;
+#filter-button:hover {
+  background-color: #b1d7d2;
+  color: #432e33;
 }
 
-.categories-list{
-  display:flex;
+#remove-all-filters{
+  margin: 1vw;
+  font-size: 1rem;
+  width: 10vw;
+  background-color: #e7472e;
+  color: white;
+  border-radius: 10px;
+}
+
+#remove-all-filters:hover {
+  background-color: #b1d7d2;
+  color: #432e33;
+}
+
+.categories-list {
+  display: flex;
   list-style-type: none;
   margin: 1vh 5vw;
   padding: 0;
 }
 
-.categories-list li{
+.categories-list li {
   margin-right: 10px;
 }
 
@@ -173,7 +187,7 @@ label span{
   position: relative;
 }
 
-#edit-entry-title{
+#edit-entry-title {
   text-align: right;
 }
 
@@ -224,7 +238,7 @@ label span{
   padding: 5vh;
 }
 
-#button-container{
+#button-container {
   display: flex;
 }
 
@@ -245,9 +259,9 @@ label span{
 
 /*-------------------- 404 Page --------------------*/
 
-#not-found-container{
+#not-found-container {
   color: #432e33;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 30vh;

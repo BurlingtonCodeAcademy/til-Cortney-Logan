@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Modal from "./Modal.js";
+import moment from "moment";
 
 function Entry(props) {
   //defines entryData to be held in state after retrieving from database
@@ -31,7 +32,9 @@ function Entry(props) {
       {/* post layed out as content of form with the ability to edit */}
       {entryData && (
         <form id="edit-an-entry" method="POST" action={`/editentry/${postID}`}>
-          <div>{entryData.date}</div>
+          <div id="edit-entry-title">
+            Original Submission: <b>{moment(entryData.date).format()}</b>
+          </div>
           <label>Title:</label>
           <textarea
             id="edit-entry-title"

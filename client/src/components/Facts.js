@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment"
 
 function Facts(props) {
   //declares state to hold entries once retrieved from database
@@ -83,7 +84,7 @@ function Facts(props) {
                 <div className="facts-page-entry">
                   <div className="entry-title">
                     <h3>{entry.title}</h3>
-                    <h3>{entry.date}</h3>
+                    <h3>{moment(entry.date).format()}</h3>
                   </div>
                   <div className="entry-content">
                     <p>{entry.content}</p>

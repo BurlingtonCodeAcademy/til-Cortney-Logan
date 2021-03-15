@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
+const moment = require("moment");
 const { ObjectId } = require("mongodb");
 
 const port = process.env.PORT || 5000;
@@ -86,12 +87,13 @@ app.get("/allposts", async (req, res) => {
   res.json(results);
 });
 
+//api end point to retrieve filter request
 app.get("/filterPosts/:category/:input", async (req, res) => {
   //initiates variables for category and input for later use
   let category = req.params.category;
   let input = req.params.input;
 
-  //if filter is for title or content search in put is directly user input
+  //if filter is for title or content search input is directly user input
   if (category === "title" || category === "content") {
     //constructs cursor that contains all entries in database collection that match query
     const cursor = await EntryModel.find({ [category]: input });
@@ -104,7 +106,7 @@ app.get("/filterPosts/:category/:input", async (req, res) => {
     //responds with json results as array
     res.json(results);
   }
-  //if users searched by category, input will be either true or false
+  //if users searched by category, input will be the category and are looking for that value to be true
   else {
     //constructs cursor that contains all entries in database collection that match query
     const cursor = await EntryModel.find({ [`categories.${input}`]: true });
@@ -179,7 +181,10 @@ app.listen(port, () => {
 //generates a new entry and sends it to database
 async function createNewEntry(entry) {
   //sets the time of the entry in local date time string
-  let entryTime = new Date().toISOString();
+  let entryTime = moment().format();
+
+  console.log("entrytime is", entryTime);
+  console.log("moment().format() is", moment().format());
 
   //constructs the new entry using the EntryModel
   const newEntry = new EntryModel({

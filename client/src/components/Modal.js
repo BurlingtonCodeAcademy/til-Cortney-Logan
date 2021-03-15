@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Modal(props) {
   //if users cancels delete closes modal and doesn't delete post
@@ -17,7 +17,7 @@ function Modal(props) {
       <div>
         <h1>Are you sure you want to delete this post?</h1>
         <div id="button-container">
-          <button onClick={confirm}>Confirm</button>
+          <Link to={"/"}><button onClick={confirm}>Confirm</button></Link>
           <button onClick={cancel}>Cancel</button>
         </div>
       </div>

@@ -126,6 +126,8 @@ label span{
 
 #search-form{
   margin: 0 25vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 #search-form select, input{
@@ -138,7 +140,7 @@ label span{
 }
 
 #user-input{
-  width: calc(32vw);
+  width: 34vw;
 }
 
 #filter-button{
@@ -171,9 +173,14 @@ label span{
   position: relative;
 }
 
+#edit-entry-title{
+  text-align: right;
+}
+
 #entry-page-container textarea {
   width: calc(50vw - 6px);
   font-size: 1.5rem;
+  text-align: left;
 }
 
 #entry-page-container label {
@@ -203,7 +210,7 @@ label span{
   color: #432e33;
 }
 
-/*-------------------- Entry Page --------------------*/
+/*-------------------- Entry Page - modal --------------------*/
 #modal-container {
   background-color: white;
   border: 3px solid #432e33;
